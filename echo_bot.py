@@ -41,7 +41,7 @@ def pizda(message):
         bot.send_message(message.chat.id, f"По миру:\n"
                                           f" Подтверждено - {country['confirmed']},\n"
                                           f" Cмертей  - {country['deaths']},\n"
-                                          f" Выздоровело: {country['recovered']}\n")
+                                          f" Выздоровело - {country['recovered']}\n")
     elif message.text == 'Back':
         # keyboard
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -60,10 +60,10 @@ def pizda(message):
     elif isinstance(country, dict):
         population = CountryInfo(message.text).population()
         bot.send_message(message.chat.id, f"В стране:\n"
+                                          f"Численность населения - {population}\n"
                                           f" Подтверждено - {country['confirmed']},\n"
                                           f" Cмертей  - {country['deaths']},\n"
-                                          f" Выздоровело: {country['recovered']}\n"
-                                          f"Численность населения - {population}")
+                                          f" Выздоровело - {country['recovered']}\n")
     elif message.text == "Other":
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
         items = [types.KeyboardButton(x['country']) for x in data]
@@ -75,6 +75,7 @@ def pizda(message):
 
     else:
         bot.send_message(message.chat.id, "No such country")
+
 
 
 # run
