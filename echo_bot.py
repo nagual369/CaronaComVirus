@@ -1,6 +1,8 @@
+# coding=utf-8
 import telebot  # библиотеки
 from covid import Covid
 from telebot import types
+from countryinfo import CountryInfo
 
 bot = telebot.TeleBot('1191501364:AAHRwcfipu_lnJp_g902GDDNJoJzwTm12BE')  # токен
 
@@ -35,7 +37,6 @@ def pizda(message):
         if x['country'] == message.text:
             country = x
 
-    print(country)
     if message.text == "World":
         bot.send_message(message.chat.id, f"По миру:\n"
                                           f" Подтверждено - {country['confirmed']},\n"
@@ -57,10 +58,12 @@ def pizda(message):
                          'Посмотри на клавиатуру и выбери свою страну или напиши в сообщении. Например "Russia"',
                          reply_markup=markup)
     elif isinstance(country, dict):
+        population = CountryInfo(message.text).population()
         bot.send_message(message.chat.id, f"В стране:\n"
                                           f" Подтверждено - {country['confirmed']},\n"
                                           f" Cмертей  - {country['deaths']},\n"
-                                          f" Выздоровело: {country['recovered']}\n")
+                                          f" Выздоровело: {country['recovered']}\n"
+                                          f"Численность населения - {population}")
     elif message.text == "Other":
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
         items = [types.KeyboardButton(x['country']) for x in data]
