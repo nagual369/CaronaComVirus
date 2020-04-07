@@ -24,8 +24,11 @@ def welcome(message):
     markup.row(item2)
     markup.row(item1, item5, item3)
     markup.row(item4, item6)
-    bot.send_message(message.chat.id,
-                     'Посмотри на клавиатуру и выбери свою страну или напиши в сообщении. Например "Russia"',
+    bot.send_message(message.chat.id, "Приветствую тебя! Этот бот покажет тебе мировую"
+                                      " статистику случаев заражения\n Covid 19, а именно"
+                                      " зафиксированное количество\n инфицированных, погибших"
+                                      " и выздоровевших.\n Посмотри на клавиатуру и выбери интересующую"
+                                      " тебя страну\n или напиши в сообщении, например: 'Russia'.",
                      reply_markup=markup)
 
 
@@ -75,7 +78,6 @@ def pizda(message):
 
     else:
         bot.send_message(message.chat.id, "No such country")
-
 
 
 # run
