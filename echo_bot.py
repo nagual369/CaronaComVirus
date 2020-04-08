@@ -61,9 +61,10 @@ def pizda(message):
                          'Посмотри на клавиатуру и выбери свою страну или напиши в сообщении. Например "Russia"',
                          reply_markup=markup)
     elif isinstance(country, dict):
-        population = CountryInfo(message.text).population()
+        # population = CountryInfo(message.text).population()
+        # f"Численность населения - {population}\n"
+
         bot.send_message(message.chat.id, f"В стране:\n"
-                                          f"Численность населения - {population}\n"
                                           f" Подтверждено - {country['confirmed']},\n"
                                           f" Cмертей  - {country['deaths']},\n"
                                           f" Выздоровело - {country['recovered']}\n")
