@@ -24,11 +24,8 @@ def welcome(message):
     markup.row(item2)
     markup.row(item1, item5, item3)
     markup.row(item4, item6)
-    bot.send_message(message.chat.id, "Приветствую тебя! Этот бот покажет тебе мировую"
-                                      " статистику случаев заражения\n Covid 19, а именно"
-                                      " зафиксированное количество\n инфицированных, погибших"
-                                      " и выздоровевших.\n Посмотри на клавиатуру и выбери интересующую"
-                                      " тебя страну\n или напиши в сообщении, например: 'Russia'.",
+    bot.send_message(message.chat.id,
+                     'Посмотри на клавиатуру и выбери свою страну или напиши в сообщении. Например "Russia"',
                      reply_markup=markup)
 
 
@@ -61,10 +58,12 @@ def pizda(message):
                          'Посмотри на клавиатуру и выбери свою страну или напиши в сообщении. Например "Russia"',
                          reply_markup=markup)
     elif isinstance(country, dict):
-        # population = CountryInfo(message.text).population()
-        # f"Численность населения - {population}\n"
-
+        if message.text == "USA":
+            population = CountryInfo("United States").population()
+        else:
+            population = CountryInfo(message.text).population()
         bot.send_message(message.chat.id, f"В стране:\n"
+                                          f"Численность населения - {population}\n"
                                           f" Подтверждено - {country['confirmed']},\n"
                                           f" Cмертей  - {country['deaths']},\n"
                                           f" Выздоровело - {country['recovered']}\n")
